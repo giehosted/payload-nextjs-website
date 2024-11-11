@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { cn } from 'src/utilities/cn'
+import { cn } from '@/utilities'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
 import React from 'react'
@@ -15,6 +15,8 @@ import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import { draftMode } from 'next/headers'
 
 import './globals.css'
+import Navbar from '@/components/Nav/Navbar'
+import { Toaster } from '@/components/ui/toaster'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
@@ -27,18 +29,26 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
       <body>
-        <Providers>
-          <AdminBar
-            adminBarProps={{
-              preview: isEnabled,
-            }}
-          />
-          <LivePreviewListener />
-
-          <Header />
-          {children}
-          <Footer />
-        </Providers>
+        <div className="flex flex-col">
+          <Providers>
+            <AdminBar
+              adminBarProps={{
+                preview: isEnabled,
+              }}
+            />
+            <LivePreviewListener />
+            <Navbar />
+            <Header />
+            <main
+              role="main"
+              className="z-20 min-h-screen flex-1 relative flex flex-col items-center pt-4 pb-16 border-t"
+            >
+              {children}
+            </main>
+            <Footer />
+            <Toaster />
+          </Providers>
+        </div>
       </body>
     </html>
   )

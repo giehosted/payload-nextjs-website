@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input'
 import { login } from '../../_utils/authActions'
 import SignInWithGoogleButton from './SignInWithGoogleButton'
-import { useToast } from '@/hooks/use-toast'
+import { useToast } from '@/components/hooks/use-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
